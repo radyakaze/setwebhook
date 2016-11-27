@@ -1,0 +1,28 @@
+{
+  "name": "setwebhook",
+  "version": "1.0.0",
+  "description": "Set webhook for telegram bot",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radyakaze/setwebhook.git"
+  },
+  "keywords": [
+    "setwebhook",
+    "webhook",
+    "telegram",
+    "bot"
+  ],
+  "author": "Radya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/radyakaze/setwebhook/issues"
+  },
+  "homepage": "https://github.com/radyakaze/setwebhook#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}

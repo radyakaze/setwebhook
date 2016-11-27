@@ -1,0 +1,73 @@
+* {
+  font-family: 'Merriweather', sans-serif;
+}
+html, body {
+  background: #f1f1f1;
+  padding: 1em;
+  max-width: 600px;
+  text-align: center;
+  margin: auto;
+}
+
+h1, h4 {
+  color: #a8a8a8;
+  text-shadow: 1px 1px 0 white;
+}
+
+form {
+  margin: 20px auto;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  padding: 1em;
+  border-radius: 8px;
+  display: block;
+  width: 100%;
+  margin-top: 1em;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  resize: none;
+  box-sizing: border-box;
+}
+input:focus {
+  box-shadow: 0 0px 2px #3FB6F2 !important;
+}
+
+#submit {
+  color: white;
+  background: #3FB6F2;
+  cursor: pointer;
+}
+#submit:hover {
+  box-shadow: 0 1px 1px 1px rgba(170, 170, 170, 0.6);
+}
+
+#result {
+  background: #fff;
+  padding: 1em;
+  border-radius: 8px;
+  display:none;
+  margin-bottom: 1em;
+}
+#result::before {
+  content: "Result:";
+  display: block;
+  font-weight: bold;
+}
+#submit[disabled] {
+  background: #a8a8a8;
+}
+
+input[disabled] {
+  cursor: not-allowed;
+}
+
+footer {
+  color: #a8a8a8;
+  font-size: small;
+}
+a {
+  color: #757575;
+  text-decoration: none;
+}
