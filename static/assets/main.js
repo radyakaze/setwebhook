@@ -2,7 +2,7 @@ var token = document.getElementById('token');
 var url = document.getElementById('url');
 var submitBtn = document.getElementById('submit');
 
-token.onkeyup = function() {
+token.oninput = function() {
   if (token.value.length > 20) {
     submitBtn.disabled = false;
     url.disabled = false;
@@ -12,7 +12,7 @@ token.onkeyup = function() {
   }
 }
 
-url.onkeyup = function() {
+url.oninput = function() {
   submitBtn.disabled = false;
   if (url.value.length > 0) {
     if (!url.value.match(/^https?:\/\/([a-z0-9\.\-]+)(\.[a-z0-9\-]+)(\/.*)?$/i)) {
