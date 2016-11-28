@@ -1,4 +1,5 @@
 var express = require('express');
+var request = require('request');
 var app = express();
 
 app.use (function(req, res, next) {
@@ -18,21 +19,23 @@ app.post('/http://*', function (req, res) {
     var responText;
     var responCode;
     if (req.get('Content-Type') == 'application/json' && !!req.body) {
-        var url = require('url').parse(req.url.substr(1));
-        if (url.hostname != null && url.hostname != req.hostname) {
+        var url = req.url.substr(1);
+        var host = require('url').parse(url).hostname;
+        if (host != null && host != req.hostname) {
             var options = {
-                host: url.hostname,
-                port: url.port || 80,
-                path: url.path,
+                url: url,
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                method: 'POST'
+                body: req.body
             };
-            var request = require('http').request(options);
-            request.write(req.body);
-            request.end();
 
+            var response = request(options, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log('Sucess');
+                }
+            });
             responCode = 200;
             responText = 'Forwarded';
         } else {
