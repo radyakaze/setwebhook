@@ -19,7 +19,8 @@ app.post('/http://*', function (req, res) {
     if (req.get('Content-Type') == 'application/json' && !!req.body) {
         var url = req.url.substr(1);
         var host = require('url').parse(url).hostname;
-        if (host != null && host != req.hostname) {
+        var blacklist = ['127.0.0.1', 'localhost', req.hostname];
+        if (host != null && blacklist.indexOf(host) == -1) {
             var options = {
                 url: url,
                 method: 'POST',
@@ -31,16 +32,16 @@ app.post('/http://*', function (req, res) {
 
             request(options, function (error, response, body) {
                 if (error) {
-                    return res.status(500).send(error);
+                    return res.status(418).send('I\'m a teapot');
                 } else {
                     return res.status(response.statusCode).send(body);
                 }
             });
         } else {
-            return res.status(401).send('Url is not valid');
+            return res.status(403).send('Url is not valid');
         }
     } else {
-        return res.status(403).send('Access not allowed');
+        return res.status(400).send('Access not allowed');
     }
 });
 
