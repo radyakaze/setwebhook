@@ -16,8 +16,6 @@ app.use (function(req, res, next) {
 });
 
 app.post('/http://*', function (req, res) {
-    var responText;
-    var responCode;
     if (req.get('Content-Type') == 'application/json' && !!req.body) {
         var url = req.url.substr(1);
         var host = require('url').parse(url).hostname;
@@ -32,22 +30,18 @@ app.post('/http://*', function (req, res) {
             };
 
             request(options, function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    console.log('Sucess');
+                if (error) {
+                    return res.status(500).send(error);
+                } else {
+                    return res.status(response.statusCode).send(body);
                 }
             });
-            responCode = 200;
-            responText = 'Forwarded';
         } else {
-            responCode = 401;
-            responText = 'Url is not valid';
+            return res.status(401).send('Url is not valid');
         }
     } else {
-        responCode = 403;
-        responText = 'Access not allowed';
+        return res.status(403).send('Access not allowed');
     }
-
-    res.status(responCode).send(responText);
 });
 
 app.use(express.static(__dirname + '/static'));
@@ -58,4 +52,6 @@ app.use(function (req, res, next) {
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-app.listen(port, ipaddress);
+app.listen(port, ipaddress, function () {
+    console.log('Setwebhook listening at %s:%s', ipaddress, port);
+});
