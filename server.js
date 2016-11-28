@@ -14,12 +14,12 @@ app.use (function(req, res, next) {
     });
 });
 
-app.post('/*', function (req, res) {
+app.post('/http://*', function (req, res) {
     var responText;
     var responCode;
     if (req.get('Content-Type') == 'application/json' && !!req.body) {
         var url = require('url').parse(req.url.substr(1));
-        if (url.hostname != null) {
+        if (url.hostname != null && url.hostname != req.hostname) {
             var options = {
                 host: url.hostname,
                 port: url.port || 80,
