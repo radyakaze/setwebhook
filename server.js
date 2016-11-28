@@ -31,7 +31,7 @@ app.post('/http://*', function (req, res) {
                 body: req.body
             };
 
-            var response = request(options, function (error, response, body) {
+            request(options, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     console.log('Sucess');
                 }
