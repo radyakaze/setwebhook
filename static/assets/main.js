@@ -14,24 +14,19 @@ token.oninput = function() {
 
 url.oninput = function() {
   submitBtn.disabled = false;
-  if (url.value.length > 0) {
-    if (!url.value.match(/^https?:\/\/([a-z0-9\.\-]+)(\.[a-z0-9\-]+)(\/.*)?$/i)) {
-      submitBtn.disabled = true;
-    }
+  var regex = /^https?:\/\/(\w+\.)?\w{3,}\.\w{2,}/i
+  if (url.value.length > 0 && !regex.test(url.value)) {
+    submitBtn.disabled = true;
   }
 }
 
 document.getElementById('setwebhook').onsubmit = function() {
   var result = document.getElementById('result');
   result.style.display = 'block';
-  result.innerHTML  = "Please wait..";
+  result.innerHTML  = 'Please wait..';
   var hook = url.value;
   if (hook.substr(0, 7) == 'http://') {
-    if (window.location.protocol != 'https:') {
-      hook = "https://setwebhook.ga/"+hook;
-    } else {
-      hook = "https://"+window.location.host+"/"+hook;
-    }
+    hook = 'https://'+(window.location.protocol != 'https:' ? 'setwebhook.ga' : window.location.host)+'/'+hook;
   } 
   var xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
@@ -42,6 +37,6 @@ document.getElementById('setwebhook').onsubmit = function() {
       result.innerHTML  = json.description;
     }
   };
-  xhttp.open('GET', "https://api.telegram.org/bot"+token.value+"/setWebhook?url="+hook, true);
+  xhttp.open('GET', 'https://api.telegram.org/bot'+token.value+'/setWebhook?url='+hook, true);
   xhttp.send();
 }
