@@ -15,7 +15,7 @@ app.use (function(req, res, next) {
     });
 });
 
-app.post('/http://*', function (req, res) {
+app.post('/https?://*', function (req, res) {
     if (req.get('Content-Type') == 'application/json' && !!req.body) {
         var url = req.url.substr(1);
         var host = require('url').parse(url).hostname;
@@ -25,6 +25,7 @@ app.post('/http://*', function (req, res) {
                 url: url,
                 method: 'POST',
                 headers: {
+                    'Content-Length': req.body.length,
                     'Content-Type': 'application/json'
                 },
                 body: req.body
