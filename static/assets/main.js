@@ -1,23 +1,14 @@
 var token = document.getElementById('token');
 var url = document.getElementById('url');
 var submitBtn = document.getElementById('submit');
-
 token.oninput = function() {
-  if (token.value.length > 20) {
-    submitBtn.disabled = false;
-    url.disabled = false;
-  } else {
-    submitBtn.disabled = true;
-    url.disabled = true;
-  }
+  disabled = !token.checkValidity();
+  submitBtn.disabled = disabled;
+  url.disabled = disabled;
 }
 
 url.oninput = function() {
-  submitBtn.disabled = false;
-  var regex = /^https?:\/\/(\w+\.)?\w{3,}\.\w{2,}/i
-  if (url.value.length > 0 && !regex.test(url.value)) {
-    submitBtn.disabled = true;
-  }
+  submitBtn.disabled = !url.checkValidity();
 }
 
 document.getElementById('setwebhook').onsubmit = function() {

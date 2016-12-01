@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Set Webhook</title>
-  <link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet"> 
-  <link href="assets/main.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">  
+  <link href="assets/style.min.css" rel="stylesheet">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="keywords" content="setwebhook, bot, telegram, webhook, webhook without ssl, webhook without https" />
@@ -13,14 +13,14 @@
 </head>
 <body>
   <h1>Set Webhook for Telegram Bot</h1>
-  <h4>Support insecure http servers.</h4>
+  <h3>Support insecure http servers</h3>
   <form action="javascript:void(0);" id="setwebhook">
-    <input type="text" id="token" placeholder="Bot Token (We don't collect your token)" autocomplete="off">
-    <input type="url" id="url" placeholder="Url (Leave empty to delete webhook)"  autocomplete="off" disabled>
+    <input type="text" id="token" placeholder="Bot Token (We don't collect your token)" autocomplete="off" pattern=".{3,}:.{10,}" required>
+    <input type="url" id="url" placeholder="Url (Leave empty to delete webhook integration)"  autocomplete="off" disabled pattern="^https?:\/\/(.*)\..{2,}">
     <input type="submit" value="SET" id="submit" disabled>
   </form>
   <div id="result"></div>
   <footer>Made by <a href="https://telegram.me/error_log">@error_log</a> | <a href="https://github.com/radyakaze/setwebhook">Source code</a></footer>
-  <script type="text/javascript" src="assets/main.js"></script>
+  <script type="text/javascript" src="assets/main.min.js"></script>
 </body>
 </html>
